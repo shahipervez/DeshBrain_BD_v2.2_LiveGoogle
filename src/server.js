@@ -13,6 +13,7 @@ import { getLiveRoute, googleRoutesConfigured, extractRouteEndpoints } from './g
 const app=express();
 const port=Number(process.env.PORT||3000);
 const allowed=(process.env.ALLOWED_ORIGINS||'http://localhost:3000').split(',').map(x=>x.trim()).filter(Boolean);
+if(process.env.RENDER_EXTERNAL_URL)allowed.push(process.env.RENDER_EXTERNAL_URL);
 app.set('trust proxy',1);
 app.use(helmet({contentSecurityPolicy:false,crossOriginResourcePolicy:{policy:'cross-origin'}}));
 app.use(cors({credentials:true,origin(origin,cb){if(!origin||allowed.includes(origin)||process.env.NODE_ENV!=='production')return cb(null,true);cb(new Error('Origin not allowed'));}}));
