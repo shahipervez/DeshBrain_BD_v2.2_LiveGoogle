@@ -1,0 +1,24 @@
+{
+  "name": "deshbrain-bd",
+  "version": "2.2.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "node --watch src/server.js",
+    "start": "node src/server.js",
+    "check": "node --check src/server.js && node --check src/store.js && node --check src/auth.js && node --check src/localBrain.js && node --check src/googleSearch.js && node --check src/googleRoutes.js && node --check public/app.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^5.1.0",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.1.0",
+    "ioredis": "^5.6.1",
+    "pg": "^8.16.0",
+    "zod": "^3.25.0"
+  }
+}

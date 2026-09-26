@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>DeshBrain BD — Live Bangladesh Intelligence</title>
+  <meta name="description" content="Bangladesh traffic intelligence, live Google web evidence, fair fares, price truth, and Desh AI.">
+  <link rel="preconnect" href="https://unpkg.com">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="side">
+    <div class="brand"><span class="mark">DB</span><div><b>DeshBrain</b><small>Bangladesh, live & useful</small></div></div>
+    <nav>
+      <button class="nav active" data-view="home"><span>◈</span>Overview</button>
+      <button class="nav" data-view="road"><span>🚗</span>Road Brain</button>
+      <button class="nav" data-view="price"><span>🛒</span>Asol Dam</button>
+      <button class="nav" data-view="chat"><span>✦</span>Desh AI</button>
+    </nav>
+    <div class="side-bottom">
+      <button id="authBtn" class="auth-side">Sign in / Create account</button>
+      <div class="trust"><span class="dot"></span><div><b>Community intelligence</b><small>Verify critical decisions.</small></div></div>
+    </div>
+  </aside>
+
+  <main>
+    <header>
+      <div><p class="eyebrow">LIVE BANGLADESH INTELLIGENCE</p><h1 id="title">Your city. Explained.</h1></div>
+      <div class="header-actions"><span id="liveState" class="pulse">● Checking</span><button id="openChat">Ask Desh AI</button><button id="profileBtn" class="profile-btn" title="Account">Guest</button></div>
+    </header>
+
+    <section id="home" class="view active">
+      <div class="hero">
+        <div>
+          <span class="chip">Traffic • Live Web • Prices • Fares • AI</span>
+          <h2>Bangladesh everyday intelligence.<br><em>One AI brain.</em></h2>
+          <p>Road signals, Google Maps live traffic (when configured), fresh Google-indexed web evidence, essential-price observations and conversational answers designed around local needs.</p>
+          <div class="heroBtns"><button data-jump="road">Explore Road Brain</button><button class="ghost" data-jump="price">Check Asol Dam</button></div>
+        </div>
+        <div class="heroOrb"><div class="ring r1"></div><div class="ring r2"></div><div class="orbText"><strong>ঢাকা</strong><span>COMMUNITY SIGNAL</span></div></div>
+      </div>
+      <div class="kpis">
+        <article><span>Active road signals</span><b id="kRoad">—</b><small>Current reports</small></article>
+        <article><span>Tracked observations</span><b id="kPrices">—</b><small>Demo + community price points</small></article>
+        <article><span>Chat intelligence</span><b id="kAi">Hybrid</b><small>Local fallback + optional AI provider</small></article>
+        <article><span>Account state</span><b id="kUser">Guest</b><small>Sign in for saved chat history</small></article>
+      </div>
+      <div class="feature-grid">
+        <article class="feature"><span>01</span><h3>Road Brain</h3><p>Community signals, incident map, route pressure and fair-fare intelligence.</p></article>
+        <article class="feature"><span>02</span><h3>Asol Dam</h3><p>Compare community observations with fresh Google-indexed shopping sources.</p></article>
+        <article class="feature"><span>03</span><h3>Desh AI</h3><p>Bangla, English and Banglish chat grounded in local data plus optional live Google evidence.</p></article>
+      </div>
+    </section>
+
+    <section id="road" class="view">
+      <div class="grid roadgrid">
+        <div class="panel mapPanel"><div class="panelHead"><div><span class="label">LIVE ROAD BRAIN</span><h3>Dhaka signal map</h3></div><div class="legend"><i class="red"></i> Critical <i class="amber"></i> Slow <i class="teal"></i> Moderate</div></div><div id="map"></div></div>
+        <div class="panel intelligence-panel">
+          <span class="label">SMART DEPARTURE</span><h3>Should I leave now?</h3>
+          <label>From<input id="from" value="Uttara"></label><label>To<input id="to" value="Dhanmondi"></label>
+          <button id="routeAsk">Analyze route timing</button><div id="routeResult" class="insight">Google Maps live-traffic ETA appears here when Routes API is configured; otherwise Desh AI uses community signals.</div>
+          <hr><span class="label">FARE INTELLIGENCE</span>
+          <div class="fareRow"><select id="mode"><option value="cng">CNG</option><option value="rickshaw">Rickshaw</option></select><button id="fareBtn">Estimate fair range</button></div><div id="fareResult" class="fareCard">Community estimate will appear here.</div>
+        </div>
+      </div>
+      <div class="grid road-lower">
+        <div class="panel reportPanel"><div><span class="label">CROWD SIGNAL</span><h3>Report what you see</h3></div>
+          <form id="reportForm"><select id="kind"><option value="jam">Traffic jam</option><option value="accident">Accident</option><option value="flood">Waterlogging</option><option value="roadblock">Road closure</option><option value="police">Police check</option><option value="rickshaw">Rickshaw congestion</option><option value="other">Other</option></select><select id="severity"><option value="2">Moderate</option><option value="3">High</option><option value="4">Severe</option><option value="5">Critical</option></select><input id="area" placeholder="Area e.g. Mirpur 10" value="Mirpur 10"><input id="desc" placeholder="What is happening?" required><input id="coords" value="23.8067,90.3686" aria-label="latitude longitude"><button>Publish signal</button></form>
+        </div>
+        <div class="panel"><div class="panelHead"><div><span class="label">RECENT SIGNALS</span><h3>Community feed</h3></div><button id="roadRefresh" class="subtle">Refresh</button></div><div id="roadFeed" class="road-feed"></div></div>
+      </div>
+    </section>
+
+    <section id="price" class="view">
+      <div class="priceHero"><div><span class="label">ASOL DAM</span><h2>Know the reported price<br>before you pay.</h2><p>Compare community observations and fresh Google-indexed web sources. Google results are current indexed evidence, not a guaranteed real-time shelf price.</p><div class="search"><input id="priceQ" value="Soybean" placeholder="Barcode or product name"><button id="priceBtn">Compare + Live Web</button></div></div><div class="scanCard"><div class="scanline"></div><span>▦</span><b>Receipt / Barcode Vision</b><small>UI-ready module for OCR and barcode ingestion in a production integration.</small></div></div>
+      <div class="grid pricegrid"><div class="panel"><div class="panelHead"><div><span class="label">PRICE COMPARISON</span><h3 id="productTitle">Soybean Oil 2L</h3></div><b id="bestPrice" class="green">—</b></div><div id="priceBars" class="bars"></div></div><div class="panel"><span class="label">PRICE TREND</span><h3>Recent observations</h3><canvas id="trend" width="500" height="250"></canvas><div class="saving"><span>AI INSIGHT</span><b id="priceInsight">Fresh evidence matters more than a stale low price.</b></div></div></div><div class="panel live-web-panel"><div class="panelHead"><div><span class="label">LIVE GOOGLE WEB</span><h3>Fresh indexed sources</h3></div><span id="webSearchBadge" class="source-badge">Not checked</span></div><div id="livePriceSources" class="source-list"><p>Click <b>Compare + Live Web</b> to search current Google-indexed sources.</p></div></div>
+    </section>
+
+    <section id="chat" class="view">
+      <div class="chat-layout">
+        <aside class="chat-history">
+          <div class="chat-history-head"><b>Chats</b><button id="newChat" title="New chat">＋</button></div>
+          <div id="chatLoginHint" class="chat-login-hint">Sign in to save and reopen conversations across this session.</div>
+          <div id="conversationList" class="conversation-list"></div>
+        </aside>
+        <div class="chatShell">
+          <div id="chatIntro" class="chatIntro"><div class="aiLogo">✦</div><h2>Desh AI</h2><p>Ask about traffic, fair fares, product prices, community reports, or fresh Google-indexed information.</p><div class="prompts"><button>Uttara থেকে Board Bazar যেতে কত সময় লাগবে?</button><button>kacha morich er price koto?</button><button>Farmgate থেকে Bashundhara CNG ভাড়া কত?</button></div></div>
+          <div id="messages" class="messages"></div>
+          <div id="thinkingStatus" class="thinking-status hidden"><span></span><span></span><span></span><b>Analyzing available evidence…</b></div>
+          <form id="chatForm" class="composer">
+            <div class="composer-top"><select id="thinkingMode" aria-label="Answer depth"><option value="quick">Quick</option><option value="balanced" selected>Balanced</option><option value="deep">Deep</option></select><span id="modeHelp">Balanced answer depth</span></div>
+            <div class="composer-row"><textarea id="chatInput" rows="1" placeholder="Message Desh AI in বাংলা, English or Banglish..."></textarea><button id="sendBtn" aria-label="Send">↑</button></div>
+          </form>
+          <small class="disclaimer">Desh AI does not expose private chain-of-thought. “Deep” mode requests broader analysis and shows a concise evidence-based answer.</small>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div id="authModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+  <div class="modal-card"><button id="closeAuth" class="modal-close">×</button><span class="label">DESHBRAIN ACCOUNT</span><h2 id="authTitle">Sign in</h2><p id="authSub">Save conversations and personalize your workspace.</p>
+    <form id="authForm"><label id="nameWrap" class="hidden">Name<input id="authName" autocomplete="name"></label><label>Email<input id="authEmail" type="email" autocomplete="email" required></label><label>Password<input id="authPassword" type="password" minlength="8" autocomplete="current-password" required></label><button id="authSubmit">Sign in</button></form>
+    <div id="authError" class="auth-error"></div><button id="authSwitch" class="link-btn">New here? Create account</button>
+  </div>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<script src="/app.js"></script>
+</body></html>
